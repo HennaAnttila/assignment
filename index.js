@@ -7,6 +7,9 @@ const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 
+app.use(express.json());
+
+
 app.engine('handlebars', exphbs.engine({
   defaultLayout: 'main',
 }));
@@ -85,7 +88,7 @@ mongoose.connect(dbURI)
 
   */
 
-// Route to show all recipes on a web page
+//route to show all recipes on a web page
 app.get('/recipes', async (req, res) => {
   try {
     const recipes = await Recipe.find();
@@ -98,3 +101,60 @@ app.get('/recipes', async (req, res) => {
     res.status(500).send('Something went wrong');
   }
 });
+
+// list all recipes
+app.get('/api/recipes', async (req, res) => {
+    try {
+      const recipes = await Recipe.find();
+      res.json(recipes);
+    } catch (err) {
+      res.status(500).json({ message: 'Error fetching recipes' });
+    }
+  });
+  
+  //list the data of one recipe
+  app.get('/api/recipes/:id', async (req, res) => {
+    try {
+      const recipe = await Recipe.findById(req.params.id);
+      if (!recipe) return res.status(404).json({ message: 'Not found' });
+      res.json(recipe);
+    } catch (err) {
+      res.status(400).json({ message: 'Invalid ID' });
+    }
+  });
+
+  //create a new recipe
+  app.post('/api/recipes', async (req, res) => {
+    try {
+      const recipe = new Recipe(req.body);
+      await recipe.save();
+      res.status(201).json(recipe);
+    } catch (err) {
+      res.status(400).json({ message: 'Error saving recipe' });
+    }
+  });
+
+  
+  // update a recipe
+  app.put('/api/recipes/:id', async (req, res) => {
+    try {
+      const updated = await Recipe.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      if (!updated) return res.status(404).json({ message: 'Not found' });
+      res.json(updated);
+    } catch (err) {
+      res.status(400).json({ message: 'Invalid ID' });
+    }
+  });
+
+  
+  // delete a recipe
+  app.delete('/api/recipes/:id', async (req, res) => {
+    try {
+      const deleted = await Recipe.findByIdAndDelete(req.params.id);
+      if (!deleted) return res.status(404).json({ message: 'Not found' });
+      res.json({ message: 'Recipe deleted' });
+    } catch (err) {
+      res.status(400).json({ message: 'Invalid ID' });
+    }
+  });
+  
