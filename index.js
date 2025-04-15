@@ -35,7 +35,6 @@ mongoose.connect(dbURI)
   const Recipe = require('./models/Recipe');
 
 /*
-    // insert recipes 
 
     const recipes = [
       {
