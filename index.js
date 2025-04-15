@@ -136,7 +136,7 @@ app.get('/api/recipes', async (req, res) => {
 
   
   // update a recipe
-  app.put('/api/recipes/:id', async (req, res) => {
+  app.patch('/api/recipes/:id', async (req, res) => {
     try {
       const updated = await Recipe.findByIdAndUpdate(req.params.id, req.body, { new: true });
       if (!updated) return res.status(404).json({ message: 'Not found' });
@@ -145,6 +145,7 @@ app.get('/api/recipes', async (req, res) => {
       res.status(400).json({ message: 'Invalid ID' });
     }
   });
+  
 
   
   // delete a recipe
