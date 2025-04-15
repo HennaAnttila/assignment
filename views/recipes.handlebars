@@ -1,0 +1,24 @@
+<header>
+  <h1>{{title}}</h1>
+</header>
+
+
+<div class="recipe-container">
+  {{#each recipes}}
+    <div class="recipe">
+      <h2>{{this.title}}</h2>
+      <ul>
+        {{#each this.ingredients}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+      <p><strong>Instructions:</strong> {{this.instructions}}</p>
+      <p><strong>Baking time:</strong> {{this.bakingTimeMinutes}} min</p>
+      <p><strong>Gluten free:</strong> {{#if this.isGlutenFree}}Yes{{else}}No{{/if}}</p>
+    </div>
+  {{/each}}
+</div>
+<footer class="site-footer">
+  <p>© 2025 Baking with Henna</p>
+</footer>
+

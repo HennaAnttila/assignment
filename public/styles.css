@@ -1,0 +1,54 @@
+body {
+    background-color: #ffe6f0;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #a0522d;
+    color: white;
+    text-align: center;
+    padding: 40px 0;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+  }
+  
+  
+  
+  .recipe-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+  }
+  
+  .recipe {
+    background-color: #fff5f0;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .recipe h2 {
+    margin-top: 0;
+    color: #8b4513;
+  }
+  
+  footer {
+    background-color: #a0522d;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  

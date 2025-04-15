@@ -29,9 +29,10 @@ mongoose.connect(dbURI)
     console.error('Connection error:', err);
   });
 
+  const Recipe = require('./models/Recipe');
+
 /*
     // insert recipes 
-    const Recipe = require('./models/Recipe');
 
     const recipes = [
       {
@@ -83,3 +84,17 @@ mongoose.connect(dbURI)
   }) 
 
   */
+
+// Route to show all recipes on a web page
+app.get('/recipes', async (req, res) => {
+  try {
+    const recipes = await Recipe.find();
+    res.render('recipes', {
+      title: 'All Recipes',
+      recipes: recipes.map(recipe => recipe.toObject())
+    });
+  } catch (err) {
+    console.error('Error fetching recipes:', err);
+    res.status(500).send('Something went wrong');
+  }
+});
